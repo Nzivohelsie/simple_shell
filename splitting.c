@@ -1,6 +1,10 @@
 #include "main.h"
 #include <string.h>
-
+/**
+ * _strtok - splitting commands into tokens
+ * @str: string
+ * Return: 0
+ */
 char **_strtok(char *str)
 {
 	str_copy = malloc(chars_read * sizeof(char));
@@ -12,7 +16,7 @@ char **_strtok(char *str)
 		token = strtok(NULL, " ");
 	}
 	strings++;
-	argv = malloc(strings * sizeof(char*));
+	argv = malloc(strings * sizeof(char *));
 	token = strtok(str_copy, " \n");
 	for (i = 0; token != NULL; i++)
 	{
