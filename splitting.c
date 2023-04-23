@@ -7,7 +7,13 @@
  */
 char **_strtok(char *str)
 {
-	str_copy = malloc(chars_read * sizeof(char));
+	char *str_copy;
+	char *token;
+	char **argv;
+	int strings = 0;
+	int i;
+
+	str_copy = malloc(strlen(str) * sizeof(char));
 	strcpy(str_copy, str);
 	token = strtok(str, " \n");
 	while (token != NULL)

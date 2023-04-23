@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
+#include "main.h"
 /**
  * main - entry point
  * Return: 0
@@ -12,19 +8,24 @@ int main(void)
 	pid_t child_pid;
 	char *prompt = "simple_shell ";
 	char *line;
-	char **argv;
-	size_t k = 0;
+	char **arguments;
+	size_t k;
 	ssize_t num_read;
 
 	while (1)
 	{
 		printf("%s", prompt);
 
+		line = malloc(k * sizeof(char));
 		num_read = getline(&line, &k, stdin);
 		if (num_read == -1)
+		{
+			printf("\n");
 			return (-1);
-		printf("%s\n", line);
-		argv = &line;
+		}
+
+		arguments = _strtok(line);
+
 		child_pid = fork();
 		if (child_pid == -1)
 		{
@@ -33,14 +34,12 @@ int main(void)
 		}
 		else if (child_pid == 0)
 		{
-			if (execve(argv[0], argv, NULL) == -1)
-			{
-				perror("Error:");
-			}
+			_execve(arguments);
 		}
 		else
 			wait (NULL);
 	}
+	free(arguments);
 	free(line);
 	return (0);
 }

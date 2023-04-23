@@ -8,4 +8,7 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 
+char **_strtok(char *str);
+void _execve(char **av);
+
 #endif
