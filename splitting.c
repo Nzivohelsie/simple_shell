@@ -19,7 +19,7 @@ char **_strtok(char *str)
 	while (token != NULL)
 	{
 		strings++;
-		token = strtok(NULL, " ");
+		token = strtok(NULL, " \n");
 	}
 	strings++;
 	argv = malloc(strings * sizeof(char *));
@@ -28,7 +28,7 @@ char **_strtok(char *str)
 	{
 		argv[i] = malloc(strlen(token) * sizeof(char));
 		strcpy(argv[i], token);
-		token = strtok(NULL, " ");
+		token = strtok(NULL, " \n");
 	}
 	argv[i] = NULL;
 	free(str_copy);
