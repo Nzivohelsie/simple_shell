@@ -1,4 +1,9 @@
 #include "main.h"
+/**
+ * _path - function that handles the path
+ * @command: character
+ * Return: NULL
+ */
 char *_path(char *command)
 {
 	char *paths = NULL;
