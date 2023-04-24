@@ -5,7 +5,11 @@
  */
 void _execve(char **av)
 {
-	if (execve(av[0], av, NULL) == -1)
+	char *command = NULL;
+	extern char **environ;
+
+	command = _path(av[0]);
+	if (execve(command, av, environ) == -1)
 	{
 		perror("Error");
 	}
