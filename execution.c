@@ -13,4 +13,5 @@ void _execve(char **av)
 	{
 		perror("Error");
 	}
+	free(command);
 }

@@ -20,19 +20,23 @@ int main(void)
 		if (num_read == -1)
 		{
 			free(line);
+			free(arguments);
 			printf("\n");
 			return (-1);
 		}
 		arguments = _strtok(line);
-		if (strcmp(arguments[0], "exit") == 0)
+		if (*arguments != NULL)
 		{
-			free(*arguments);
-			free(arguments);
-			free(line);
-			exit(0);
+			if (strcmp(arguments[0], "exit") == 0)
+			{
+				free(*arguments);
+				free(arguments);
+				free(line);
+				exit(0);
+			}
+			else if (strcmp(arguments[0], "env") == 0)
+				_environ();
 		}
-		if (strcmp(arguments[0], "env") == 0)
-			_environ();
 		path = _path(arguments[0]);
 		if (path != NULL)
 		{
@@ -40,12 +44,18 @@ int main(void)
 			if (child_pid == -1)
 			{
 				free(line);
+				free(path);
+				free(*arguments);
 				free(arguments);
 				return (1);
 			}
 			else if (child_pid == 0)
 			{
 				_execve(arguments);
+				free(path);
+				free(line);
+				free(*arguments);
+				free(arguments);
 			}
 			else
 			{
