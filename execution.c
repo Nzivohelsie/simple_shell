@@ -1,7 +1,7 @@
 #include "main.h"
 /**
- * main - function executes command
- * Return: 0
+ * _execve - function executes command
+ * @av: argument
  */
 void _execve(char **av)
 {
