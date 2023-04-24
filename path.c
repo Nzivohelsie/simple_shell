@@ -10,6 +10,8 @@ char *_path(char *command)
 	char *command_path = NULL;
 	struct stat statbuf;
 
+	if (command == NULL)
+		return (NULL);
 	paths = getenv("PATH");
 	path_length = strlen(paths);
 	path_copy = malloc((path_length + 1) * sizeof(char));

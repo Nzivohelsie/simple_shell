@@ -24,36 +24,37 @@ int main(void)
 			return (-1);
 		}
 		arguments = _strtok(line);
-		path = _path(arguments[0]);
-		if (path != NULL)
-		{
-			child_pid = fork();
-			if (child_pid == -1)
+			path = _path(arguments[0]);
+			if (path != NULL)
 			{
-				free(line);
-				free(arguments);
-				return (1);
-			}
-			else if (child_pid == 0)
-			{
-				_execve(arguments);
+				child_pid = fork();
+				if (child_pid == -1)
+				{
+					free(line);
+					free(arguments);
+					return (1);
+				}
+				else if (child_pid == 0)
+				{
+					_execve(arguments);
+				}
+				else
+				{
+					wait (NULL);
+					free(path);
+					free(*arguments);
+					free(arguments);
+				}
 			}
 			else
 			{
-				wait (NULL);
 				free(path);
 				free(*arguments);
 				free(arguments);
 			}
-		}
-		else
-		{
-			free(path);
-			free(*arguments);
-			free(arguments);
-		}
 	}
 	free(path);
+	free(*arguments);
 	free(arguments);
 	free(line);
 	return (0);
