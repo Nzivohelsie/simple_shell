@@ -12,5 +12,6 @@
 char **_strtok(char *str);
 void _execve(char **av);
 char *_path(char *command);
+int _environ(void);
 
 #endif

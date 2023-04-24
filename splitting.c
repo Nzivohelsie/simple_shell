@@ -15,6 +15,8 @@ char **_strtok(char *str)
 	char *delimiter = " \n";
 	char *pointer = str;
 
+	if (str == NULL)
+		return(NULL);
 	str_copy = malloc((strlen(pointer) + 1) * sizeof(char));
 	strcpy(str_copy, pointer);
 	token = strtok(pointer, delimiter);

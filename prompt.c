@@ -11,6 +11,7 @@ int main(void)
 	char **arguments = NULL;
 	size_t k = 0;
 	ssize_t num_read;
+	char *path = NULL;
 
 	while (1)
 	{
@@ -23,24 +24,46 @@ int main(void)
 			return (-1);
 		}
 		arguments = _strtok(line);
-		child_pid = fork();
-		if (child_pid == -1)
+		if (strcmp(arguments[0], "exit") == 0)
 		{
-			free(line);
+			free(*arguments);
 			free(arguments);
-			return (1);
+			free(line);
+			exit(0);
 		}
-		else if (child_pid == 0)
+		if (strcmp(arguments[0], "env") == 0)
+			_environ();
+		path = _path(arguments[0]);
+		if (path != NULL)
 		{
-			_execve(arguments);
+			child_pid = fork();
+			if (child_pid == -1)
+			{
+				free(line);
+				free(arguments);
+				return (1);
+			}
+			else if (child_pid == 0)
+			{
+				_execve(arguments);
+			}
+			else
+			{
+				wait (NULL);
+				free(path);
+				free(*arguments);
+				free(arguments);
+			}
 		}
 		else
 		{
-			wait (NULL);
+			free(path);
 			free(*arguments);
 			free(arguments);
 		}
 	}
+	free(path);
+	free(*arguments);
 	free(arguments);
 	free(line);
 	return (0);
