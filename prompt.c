@@ -39,12 +39,11 @@ int main(void)
 				_environ();
 		}
 		path = _path(arguments[0]);
-		if (path)
+		if (path != NULL)
 		{
 			child_pid = fork();
 			if (child_pid == -1)
 			{
-				free(path);
 				free(*arguments);
 				free(arguments);
 				return (1);
@@ -52,7 +51,6 @@ int main(void)
 			else if (child_pid == 0)
 			{
 				_execve(arguments);
-				free(path);
 				free(line);
 				free(*arguments);
 				free(arguments);
@@ -62,17 +60,14 @@ int main(void)
 				wait (NULL);
 				free(*arguments);
 				free(arguments);
-				free(path);
 			}
 		}
 		else
 		{
-			free(path);
 			free(*arguments);
 			free(arguments);
 		}
 	}
-	free(path);
 	free(*arguments);
 	free(arguments);
 	free(line);

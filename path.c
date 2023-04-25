@@ -43,9 +43,10 @@ char *_path(char *command)
 		}
 		token = strtok(NULL, delimiter);
 	}
-	free(paths);
+	/**free(command_path);*/
+	/**free(paths);*/
 	free(path_copy);
-	free(token);
+	/**free(token);*/
 	if (stat(command, &statbuf) == 0)
 		return (command);
 	return (NULL);
