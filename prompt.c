@@ -10,6 +10,7 @@ int main(void)
 	char *line = NULL;
 	char **arguments = NULL;
 	size_t k = 0;
+	int status;
 	ssize_t num_read;
 	char *path = NULL;
 
@@ -20,22 +21,20 @@ int main(void)
 		if (num_read == -1)
 		{
 			free(line);
-			free(*arguments);
-			free(arguments);
 			printf("\n");
 			return (-1);
 		}
 		arguments = _strtok(line);
 		if (*arguments != NULL)
 		{
-			if (strcmp(arguments[0], "exit") == 0)
+			if (_strcmp(arguments[0], "exit") == 0)
 			{
 				free(*arguments);
 				free(arguments);
 				free(line);
 				exit(0);
 			}
-			else if (strcmp(arguments[0], "env") == 0)
+			else if (_strcmp(arguments[0], "env") == 0)
 				_environ();
 		}
 		path = _path(arguments[0]);
@@ -48,24 +47,24 @@ int main(void)
 				free(arguments);
 				return (1);
 			}
-			else if (child_pid == 0)
+			if (child_pid == 0)
 			{
 				_execve(arguments);
-				free(line);
-				free(*arguments);
-				free(arguments);
+				sleep(3);
 			}
 			else
 			{
-				wait (NULL);
+				wait(&status);
 				free(*arguments);
 				free(arguments);
+				free(path);
 			}
 		}
 		else
 		{
 			free(*arguments);
 			free(arguments);
+			free(path);
 		}
 	}
 	free(*arguments);

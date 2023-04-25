@@ -13,5 +13,9 @@ char **_strtok(char *str);
 void _execve(char **av);
 char *_path(char *command);
 int _environ(void);
+char *_strcat(char *dest, char *src);
+char *_strcpy(char *dest, char *src);
+int _strlen(char *s);
+int _strcmp(char *s1, char *s2);
 
 #endif

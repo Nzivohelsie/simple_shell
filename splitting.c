@@ -13,13 +13,12 @@ char **_strtok(char *str)
 	int strings = 0;
 	int i;
 	char *delimiter = " \n";
-	char *pointer = str;
 
 	if (str == NULL)
 		return(NULL);
-	str_copy = malloc((strlen(pointer) + 1) * sizeof(char));
-	strcpy(str_copy, pointer);
-	token = strtok(pointer, delimiter);
+	str_copy = malloc((_strlen(str) + 1) * sizeof(char));
+	_strcpy(str_copy, str);
+	token = strtok(str, delimiter);
 	while (token != NULL)
 	{
 		strings++;
@@ -27,19 +26,14 @@ char **_strtok(char *str)
 	}
 	strings++;
 	argv = malloc(strings * sizeof(char *));
-	if (argv == NULL)
-	{
-		free(str_copy);
-		return (NULL);
-	}
 	token = strtok(str_copy, delimiter);
 	for (i = 0; token != NULL; i++)
 	{
-		argv[i] = malloc((strlen(token) + 1) * sizeof(char));
-		strcpy(argv[i], token);
+		argv[i] = malloc((_strlen(token) + 1) * sizeof(char));
+		_strcpy(argv[i], token);
 		token = strtok(NULL, delimiter);
 	}
 	argv[i] = NULL;
 	free(str_copy);
-	return (argv);
+return (argv);
 }

@@ -18,18 +18,18 @@ char *_path(char *command)
 	if (command == NULL)
 		return (NULL);
 	paths = getenv("PATH");
-	path_length = strlen(paths);
+	path_length = _strlen(paths);
 	path_copy = malloc((path_length + 1) * sizeof(char));
-	strcpy(path_copy, paths);
-	command_length = strlen(command);
+	_strcpy(path_copy, paths);
+	command_length = _strlen(command);
 	token = strtok(path_copy, delimiter);
 	while (token != NULL)
 	{
-		command_path = malloc(strlen(token) + command_length + 2);
-		strcpy(command_path, token);
-		strcat(command_path, "/");
-		strcat(command_path, command);
-		strcat(command_path, "\0");
+		command_path = malloc(_strlen(token) + command_length + 2);
+		_strcpy(command_path, token);
+		_strcat(command_path, "/");
+		_strcat(command_path, command);
+		_strcat(command_path, "\0");
 
 		if (stat(command_path, &statbuf) != 0)
 		{
@@ -43,10 +43,7 @@ char *_path(char *command)
 		}
 		token = strtok(NULL, delimiter);
 	}
-	/**free(command_path);*/
-	/**free(paths);*/
 	free(path_copy);
-	/**free(token);*/
 	if (stat(command, &statbuf) == 0)
 		return (command);
 	return (NULL);

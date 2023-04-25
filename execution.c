@@ -13,6 +13,4 @@ void _execve(char **av)
 	{
 		perror("Error");
 	}
-	free(*av);
-	free(av);
 }
