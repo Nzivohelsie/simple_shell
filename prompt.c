@@ -20,6 +20,7 @@ int main(void)
 		if (num_read == -1)
 		{
 			free(line);
+			free(*arguments);
 			free(arguments);
 			printf("\n");
 			return (-1);
@@ -38,12 +39,11 @@ int main(void)
 				_environ();
 		}
 		path = _path(arguments[0]);
-		if (path != NULL)
+		if (path)
 		{
 			child_pid = fork();
 			if (child_pid == -1)
 			{
-				free(line);
 				free(path);
 				free(*arguments);
 				free(arguments);
@@ -60,9 +60,9 @@ int main(void)
 			else
 			{
 				wait (NULL);
-				free(path);
 				free(*arguments);
 				free(arguments);
+				free(path);
 			}
 		}
 		else
