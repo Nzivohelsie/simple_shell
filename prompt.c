@@ -5,14 +5,13 @@
  */
 int main(void)
 {
-	pid_t child_pid;
 	char *prompt = "simple_shell ";
 	char *line = NULL;
 	char **arguments = NULL;
 	size_t k = 0;
-	int status;
 	ssize_t num_read;
 	char *path = NULL;
+	int i;
 
 	while (1)
 	{
@@ -40,29 +39,13 @@ int main(void)
 		path = _path(arguments[0]);
 		if (path != NULL)
 		{
-			child_pid = fork();
-			if (child_pid == -1)
+			_execve(path, arguments);
+			free(path);
+			for (i = 0; arguments[i] != NULL; i++)
 			{
-				free(path);
-				free(*arguments);
-				free(arguments);
-				return (1);
+				free(arguments[i]);
 			}
-			if (child_pid == 0)
-			{
-				_execve(path, arguments);
-				free(path);
-				free(*arguments);
-				free(arguments);
-				sleep(3);
-			}
-			else
-			{
-				wait(&status);
-				free(path);
-				free(*arguments);
-				free(arguments);
-			}
+			free(arguments);
 		}
 		else
 		{

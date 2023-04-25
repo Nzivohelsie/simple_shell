@@ -10,7 +10,7 @@
 #include <sys/stat.h>
 
 char **_strtok(char *str);
-void _execve(char *command, char **av);
+int _execve(char *command, char **av);
 char *_path(char *command);
 int _environ(void);
 char *_strcat(char *dest, char *src);
