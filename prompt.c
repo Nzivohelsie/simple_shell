@@ -43,21 +43,25 @@ int main(void)
 			child_pid = fork();
 			if (child_pid == -1)
 			{
+				free(path);
 				free(*arguments);
 				free(arguments);
 				return (1);
 			}
 			if (child_pid == 0)
 			{
-				_execve(arguments);
+				_execve(path, arguments);
+				free(path);
+				free(*arguments);
+				free(arguments);
 				sleep(3);
 			}
 			else
 			{
 				wait(&status);
+				free(path);
 				free(*arguments);
 				free(arguments);
-				free(path);
 			}
 		}
 		else

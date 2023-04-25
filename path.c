@@ -45,6 +45,10 @@ char *_path(char *command)
 	}
 	free(path_copy);
 	if (stat(command, &statbuf) == 0)
-		return (command);
+	{
+		command_path = malloc(command_length + 1);
+		command_path = _strcpy(command_path, command);
+                return (command_path);
+	}
 	return (NULL);
 }
