@@ -6,16 +6,27 @@
  * @env: argument
  * Return: 0
  */
+void signal_handler(int signal_num)
+{
+	(void) signal_num;
+}
 int main(int ac, char **av, char **env)
 {
 	char *prompt = "simple_shell ", *line = NULL, *path = NULL;
 	char **arguments = NULL;
 	size_t k = 0;
 	ssize_t num_read;
+	int i;
 
+	if (isatty(STDIN_FILENO))
+		i = 1;
+	else
+		i = 0;
 	while (1)
 	{
-		_printf("%s", prompt);
+		signal(SIGINT, signal_handler);
+		if (i)
+			_printf("%s", prompt);
 		num_read = getline(&line, &k, stdin);
 		if (num_read == -1)
 		{

@@ -22,7 +22,7 @@ int _execve(char *command, char **args, char **av, char **environ)
 	{
 		if (execve(command, args, environ) == -1)
 		{
-			_printf("%s: 1: %s: not found\n", av[0], command);
+			_printf("%s: 1: %s: not found", av[0], command);
 		}
 	}
 	else
