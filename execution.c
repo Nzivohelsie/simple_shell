@@ -1,9 +1,13 @@
 #include "main.h"
 /**
- * _execve - function that executes command
+ * _execve - function executes command
  * @av: argument
+ * @command: argument
+ * @args: argument
+ * @environ: argument
+ * Return: 0 on success
  */
-int _execve(char *command, char **av, char **environ)
+int _execve(char *command, char **args, char **av, char **environ)
 {
 	pid_t child_pid;
 	int status;
@@ -13,3 +17,17 @@ int _execve(char *command, char **av, char **environ)
 	{
 		perror("error");
 		return (1);
+	}
+	else if (child_pid == 0)
+	{
+		if (execve(command, args, environ) == -1)
+		{
+			_printf("%s: 1: %s: not found\n", av[0], command);
+		}
+	}
+	else
+	{
+		wait(&status);
+	}
+	return (1);
+}

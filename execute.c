@@ -1,11 +1,16 @@
 #include "main.h"
 /**
- * _execute - function that executes commands
- * @path: parameter
- * @arguments: parameter
- * @env: parameter
+ * _execute - execute
+ * @path: path
+ * @arguments: argumeent
+ * @av: argument
+ * @env: argument
  * Return: 1
  */
-int _execute(char *path, char **arguments, char **env)
+int _execute(char *path, char **arguments, char **av, char **env)
 {
-		_execve(path, arguments, env);
+		_execve(path, arguments, av, env);
+		free(path);
+		_free(arguments);
+	return (1);
+}
