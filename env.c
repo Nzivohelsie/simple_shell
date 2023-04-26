@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * _environ - function to handle built-in env
+ * _environ - function to handle the environment
  *
  * Return: 1
  */
