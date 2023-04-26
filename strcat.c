@@ -11,17 +11,3 @@ char *_strcat(char *dest, char *src)
 	int l = 0;
 	int le = 0;
 	char *p = dest;
-
-	for (a = 0; dest[a] != '\0'; a++)
-		le++;
-	for (b = 0; src[b] != '\0'; b++)
-		l++;
-	for (i = 0; i < le; i++)
-		dest[i] = dest[i];
-	for (i = le; i <= (le + l); i++)
-	{
-		dest[i] = *src;
-		src++;
-	}
-	return (p);
-}
