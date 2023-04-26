@@ -1,6 +1,6 @@
 #include "main.h"
 /**
- * _path - function that handles the path
+ * _path - function that handles the path command
  * @command: character
  * Return: NULL
  */
