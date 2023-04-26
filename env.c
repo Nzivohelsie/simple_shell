@@ -1,19 +1,13 @@
 #include "main.h"
 
 /**
- * _environ - function to handle the environment
+ * _environ - function to handle the built-in env
  *
  * Return: 1
  */
-int _environ(void)
+int _environ(int ac, char **av, char **env)
 {
-	extern char **environ;
-	int i = 0;
+	unsigned int i;
 
-	while (environ[i] != NULL)
-	{
-		printf("%s\n", environ[i]);
-		i++;
-	}
-	return (1);
-}
+	(void)av;
+	(void)ac;
