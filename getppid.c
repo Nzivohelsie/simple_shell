@@ -7,7 +7,7 @@
  */
 int main(void)
 {
-	int i =9;
+	int i = 9;
 	int j = 6;
 	pid_t ppid;
 	int sum = i + j;
